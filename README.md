@@ -1,4 +1,11 @@
 # Google Calendar Event Extractor
+<p align="center">
+    <a href="#key-features">Key Features</a> |
+    <a href="#how-to-use">How to Use</a> |
+    <a href="#known-issues">Known Issues</a>
+</p>
+
+## Overview
 
 This Python script extracts events from Google Calendar using the Google Calendar API and generates a CSV report.
 
