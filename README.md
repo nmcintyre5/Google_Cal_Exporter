@@ -36,6 +36,8 @@ This Python script extracts events from Google Calendar using the Google Calenda
 
 4.  Ensure Google Calendar is available to the public. In the left menu bar, click on "Calendar settings" for the desired calendar. Scroll down to the "Access permissions" section. Check the box next to "Make available to public" to enable this option.
 
+![Screenshot of Google Calendar setting](/Cal_Public_Setting.png)
+
 5.    Replace the placeholders for api_key and calendar_id with your actual API key and calendar IDs.
 
 ### Running the Script
