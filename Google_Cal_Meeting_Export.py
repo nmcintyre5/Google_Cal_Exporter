@@ -16,6 +16,8 @@ SECRET_API_KEY = os.getenv("SECRET_API_KEY")
 SECRET_CALENDAR_ID = os.getenv("SECRET_CALENDAR_ID")
 DEBUG = os.getenv("DEBUG")
 
+# Check for if enviornment variable are undefined and add error if so. 
+
 # Use environment variables for API key and calendar ID
 api_key = SECRET_API_KEY
 calendar_id = SECRET_CALENDAR_ID

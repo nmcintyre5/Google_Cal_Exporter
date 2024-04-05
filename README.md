@@ -45,7 +45,7 @@ This Python script extracts events from Google Calendar using the Google Calenda
 
 ![Screenshot of Google Calendar setting](/Cal_Public_Setting.png)
 
-5.    Replace the placeholders for api_key and calendar_id with your actual API key and calendar IDs.
+5.  Add a .env file according to the .envtemplate file. Replace the placeholders for api_key and calendar_id with your actual API key and calendar IDs.
 
 ### Running the Script
 
