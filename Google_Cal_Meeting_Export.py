@@ -22,8 +22,25 @@ DEBUG = os.getenv("DEBUG")
 api_key = SECRET_API_KEY
 calendar_id = SECRET_CALENDAR_ID
 
-# Set your calendar timezone
+# Set your calendar timezone. Default is Los Angeles.
 calendar_timezone = "America/Los_Angeles"
+
+# Define timezone offset dictionary
+timezone_offsets = {
+    "America/New_York": "-04:00",  # Eastern Time (ET)
+    "America/Chicago": "-05:00",    # Central Time (CT)
+    "America/Denver": "-06:00",     # Mountain Time (MT)
+    "America/Los_Angeles": "-07:00", # Los Angeles Time (PT)
+    "Europe/London": "+01:00",      # British Time (BT)
+    "Europe/Berlin": "+02:00",      # Central European Time (CET)
+    "Asia/Tokyo": "+09:00",         # Japan Standard Time (JST)
+    "Australia/Sydney": "+10:00",   # Australian Eastern Time (AET)
+    "Asia/Shanghai": "+08:00"       # China Standard Time (CST)
+    # Add another timezone offsets as needed
+}
+
+# Retrieve the timezone offset based on calendar timezone
+timezone_offset = timezone_offsets.get(calendar_timezone, "+00:00")  # Default to UTC if timezone not found
 
 # Prompt the user to input the start date and end date
 start_date_str = input("Enter the start date (YYYY-MM-DD): ")
@@ -33,13 +50,12 @@ end_date_str = input("Enter the end date (YYYY-MM-DD): ")
 start_date_obj = datetime.strptime(start_date_str, "%Y-%m-%d").date()
 end_date_obj = datetime.strptime(end_date_str, "%Y-%m-%d").date()
 
-
 # Retrieve event list using Google Calendar API.
 service = build("calendar", "v3", developerKey=api_key)
 events_result = service.events().list(
     calendarId=calendar_id,
-    timeMin=start_date_str + "T00:00:00Z",  # Append time component for start date
-    timeMax=end_date_str + "T23:59:59Z",  # Append time component for end date
+    timeMin=start_date_str + "T00:00:00" + timezone_offset,  # Append time component for start date
+    timeMax=end_date_str + "T23:59:59" + timezone_offset,  # Append time component for end date
     fields="items(summary,start,end)",
     timeZone="UTC",
     singleEvents=True  # Expand recurring events
