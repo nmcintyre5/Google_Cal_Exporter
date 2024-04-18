@@ -3,12 +3,12 @@
 
 ## Overview
 
-This Python script extracts events from Google Calendar between start and end dates, specified by the user, using the Google Calendar API and generates a CSV report. Optionally, it will generate a report that will print all meetings with a specific event title of the user's selection to the screen between the designated start date and end date, along with the total number of hours spent on that event title. This feature is useful for time blocking and for recurring meetings used for tasks with the same title to track the total time spent on them. 
+This Python script extracts events from Google Calendar between start and end dates, specified by the user, using the Google Calendar API, and generates a CSV report. Optionally, it will generate a report that will print all meetings with a specific event title of the user's selection to the screen between the designated start date and end date, along with the total number of hours spent on that event title. This feature is useful for time blocking and for recurring meetings used for tasks with the same title to track the total time spent on them. 
 
 ## Key Features
 
 - **Data Extraction:** Retrieves events from Google Calendar using the Google Calendar API.
-- **Time Zone Conversion:**: Converts event times to the local time zone.
+- **Time Zone Conversion:**: Converts event times to the Los Angeles time zone.
 - **Data Processing:** Parses event details and calculates event durations.
 - **Data Filtering:** Filters events based on user input for start and end dates.
 - **Export to CSV:** Generates a CSV report with event details.
