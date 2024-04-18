@@ -1,9 +1,5 @@
 # Google Calendar Event Extractor
-<p align="center">
-    <a href="#key-features">Key Features</a> |
-    <a href="#how-to-use">How to Use</a> |
-    <a href="#known-issues">Known Issues</a>
-</p>
+[Overview](#overview) | [Key Features](#key-features) | [How to Use](#how-to-install)| [Known Issues](#known-issues)
 
 ## Overview
 
@@ -14,9 +10,9 @@ This Python script extracts events from Google Calendar using the Google Calenda
 - **Data Extraction:** Retrieves events from Google Calendar using the Google Calendar API.
 - **Time Zone Conversion:**: Converts event times to the local time zone.
 - **Data Processing:** Parses event details and calculates event durations.
-- **Data Filtering:**Filters events based on user input for start and end dates.
+- **Data Filtering:** Filters events based on user input for start and end dates.
 - **Export to CSV:** Generates a CSV report with event details.
-- **Report Generation:**Optionally generates reports for individual meetings based on extracted events.
+- **Report Generation:** Optionally generates reports for individual meetings based on extracted events.
 
 ## How to Use
 
