@@ -223,6 +223,29 @@ while True:
                     duration_rounded = float(session[5])  # Extract converted event duration
                     total_hours += duration_rounded
         return total_hours
+    
+    def calculate_daily_student_hours(sessions, student_name, start_date, end_date):
+        daily_hours_map = {}  # Map to store daily hours for each date
+        for session in sessions:
+            event_title = session[0].strip()  # Get event title
+            if student_name in event_title:
+                start_date_str = session[1]  # Get start date string
+                end_date_str = session[1]  # Get end date string
+
+                # Parse start date into datetime object
+                start_time = datetime.strptime(start_date_str, "%m/%d/%Y").date()
+
+                if start_time >= start_date and start_time <= end_date:
+                    duration_rounded = float(session[5])  # Extract converted event duration
+
+                    # If the date is already in the map, add the duration to the existing total
+                    if start_time in daily_hours_map:
+                        daily_hours_map[start_time] += duration_rounded
+                    else:
+                        daily_hours_map[start_time] = duration_rounded
+
+        total_daily_hours = sum(daily_hours_map.values())
+        return total_daily_hours
 
     # Define a function to extract the student name from the event title
     def extract_student_name(event_title):
@@ -295,14 +318,28 @@ while True:
 
             # Sort sessions for the selected student by start date before printing
             sorted_sessions = sorted((session for session in sessions[1:] if selected_name in session[0]), key=lambda x: datetime.strptime(x[1], "%m/%d/%Y"))
-
+            printed_dates = set()  # Set to store dates for which total has been printed
+            
             # Loop through sorted sessions for the selected student
             for session in sorted_sessions:
                 event_title = session[0].strip()  # Strip leading and trailing spaces
                 cleaned_title = clean_event_title(event_title)
-                start_date = datetime.strptime(session[1], "%m/%d/%Y")  # Parse start date
+                start_date_str = session[1]  # Get start date string
+                end_date_str = session[1]  # Get end date string
+                start_date = datetime.strptime(start_date_str, "%m/%d/%Y").date()  # Parse start date
+                end_date = datetime.strptime(end_date_str, "%m/%d/%Y").date()  # Parse end date
                 duration_rounded = float(session[5])  # Extract converted event duration
-                print(f"{cleaned_title} {start_date.strftime('%m/%d/%Y')} {duration_rounded:.2f} hours")
+
+                # Check if the total for this date has already been printed
+                if start_date not in printed_dates:
+                    # Calculate total daily hours for the current session
+                    daily_student_hours = calculate_daily_student_hours(sorted_sessions, selected_name, start_date, end_date)
+
+                    print(f"{cleaned_title} {start_date.strftime('%m/%d/%Y')} {daily_student_hours:.2f} hours")
+                    
+                    # Add the date to the set of printed dates
+                    printed_dates.add(start_date)
+
 
 
             # Print the total hours for the selected student
