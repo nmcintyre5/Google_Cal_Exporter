@@ -324,26 +324,22 @@ while True:
             for session in sorted_sessions:
                 event_title = session[0].strip()  # Strip leading and trailing spaces
                 cleaned_title = clean_event_title(event_title)
-                start_date_str = session[1]  # Get start date string
-                end_date_str = session[1]  # Get end date string
-                start_date = datetime.strptime(start_date_str, "%m/%d/%Y").date()  # Parse start date
-                end_date = datetime.strptime(end_date_str, "%m/%d/%Y").date()  # Parse end date
+                start_date_str_session = session[1]  # Get start date string for the session
+                start_date = datetime.strptime(start_date_str_session, "%m/%d/%Y").date()  # Parse start date for the session
                 duration_rounded = float(session[5])  # Extract converted event duration
 
                 # Check if the total for this date has already been printed
                 if start_date not in printed_dates:
                     # Calculate total daily hours for the current session
-                    daily_student_hours = calculate_daily_student_hours(sorted_sessions, selected_name, start_date, end_date)
+                    daily_student_hours = calculate_daily_student_hours(sorted_sessions, selected_name, start_date, start_date)
 
                     print(f"{cleaned_title} {start_date.strftime('%m/%d/%Y')} {daily_student_hours:.2f} hours")
                     
                     # Add the date to the set of printed dates
                     printed_dates.add(start_date)
 
-
-
             # Print the total hours for the selected student
-            print(f"{selected_name} had a total of {total_hours} hours between {start_date_str} and {end_date_str}")
+            print(f"{selected_name} had a total of {total_hours} hours between {start_date_obj.strftime('%m/%d/%Y')} and {end_date_obj.strftime('%m/%d/%Y')}")
 
             # Store student data
             student_data.append([selected_name, total_hours])
@@ -354,3 +350,4 @@ while True:
             break
 else:
     print("Thank you. Goodbye.")
+
